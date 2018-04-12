@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2018 Johnathan Louie
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+    <head>
+        <title>PUBG Backpack Planner</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>PUBG Backpack Planner</h1>
+        <input type="checkbox" checked disabled> Has a body +20<br>
+        <input id="belt" type="checkbox" checked> Wearing belt +50<br>
+        <input id="vest" type="checkbox" checked> Wearing vest +70<br>
+        <input id="backpack0" type="radio" name="backpack"> No backpack +0<br>
+        <input id="backpack1" type="radio" name="backpack"> Level 1 backpack +170<br>
+        <input id="backpack2" type="radio" name="backpack" checked> Level 2 backpack +220<br>
+        <input id="backpack3" type="radio" name="backpack"> Level 3 backpack +270<br>
+        <input id="capacity" value="0">Total Capacity<br>
+        <h2>Ammunition</h2>
+        <input id="ammo9" value="0">9mm -0.375<br>
+        <input id="ammo45" value="0">.45 ACP -0.4<br>
+        <input id="ammo12" value="0">12 gauge -1.25<br>
+        <input id="ammo556" value="0">5.56mm -0.5<br>
+        <input id="ammo762" value="0">7.62mm -0.7<br>
+        <input id="ammomag" value="0">Magnum -1.0<br>
+        <h2>Healing Items</h2>
+        <input id="medkit" value="0">Med kit -20<br>
+        <input id="firstaid" value="0">first aid -10<br>
+        <input id="bandage" value="0">bandage -2<br>
+        <input id="energy" value="0">energy drink -4<br>
+        <input id="painkiller" value="0">painkiller -10<br>
+        <input id="adrenaline" value="0">adrenaline -20<br>
+        <h2>Throwables</h2>
+        <input id="frag" value="0">frag -12<br>
+        <input id="molotov" value="0">molotov -18<br>
+        <input id="smoke" value="0">smoke -16<br>
+        <input id="stun" value="0">stun -14<br>
+        <h2>Miscellaneous</h2>
+        <input id="gascan" value="0">gas can -20<br>
+        <h2>Total</h2>
+        <input id="weight" value="0">Weight<br>
+        <input id="remaining-capacity" value="0">Remaining Capacity<br>
+        <script>
+            var capacity = 0;
+            var weight = 0;
+            var remaining = 0;
+            function updateCapacity()
+            {
+                var cap = 20;
+                if ($("#belt").prop("checked")) {
+                    cap += 50;
+                }
+                if ($("#vest").prop("checked")) {
+                    cap += 70;
+                }
+                if ($("#backpack0").prop("checked")) {
+                    cap += 0;
+                } else if ($("#backpack1").prop("checked")) {
+                    cap += 170;
+                } else if ($("#backpack2").prop("checked")) {
+                    cap += 220;
+                } else {
+                    cap += 270;
+                }
+                $("#capacity").val(cap);
+                capacity = cap;
+            }
+            function updateWeight()
+            {
+                var wgt = 0;
+                // ammo
+                wgt += parseInt($("#ammo9").val()) * 0.375;
+                wgt += parseInt($("#ammo45").val()) * 0.4;
+                wgt += parseInt($("#ammo12").val()) * 1.25;
+                wgt += parseInt($("#ammo556").val()) * 0.5;
+                wgt += parseInt($("#ammo762").val()) * 0.7;
+                wgt += parseInt($("#ammomag").val()) * 1;
+                // healing
+                wgt += parseInt($("#medkit").val()) * 20;
+                wgt += parseInt($("#firstaid").val()) * 10;
+                wgt += parseInt($("#bandage").val()) * 2;
+                wgt += parseInt($("#energy").val()) * 4;
+                wgt += parseInt($("#painkiller").val()) * 10;
+                wgt += parseInt($("#adrenaline").val()) * 20;
+                // throwables
+                wgt += parseInt($("#frag").val()) * 12;
+                wgt += parseInt($("#molotov").val()) * 18;
+                wgt += parseInt($("#smoke").val()) * 16;
+                wgt += parseInt($("#stun").val()) * 14;
+                // misc
+                wgt += parseInt($("#gascan").val()) * 20;
+                $("#weight").val(wgt);
+                weight = wgt;
+            }
+            function updateRemaining()
+            {
+                updateCapacity();
+                updateWeight();
+                remaining = capacity - weight;
+                $("#remaining-capacity").val(remaining);
+            }
+            updateRemaining();
+            $("#belt").change(updateRemaining);
+            $("#vest").change(updateRemaining);
+            $("#backpack0").change(updateRemaining);
+            $("#backpack1").change(updateRemaining);
+            $("#backpack2").change(updateRemaining);
+            $("#backpack3").change(updateRemaining);
+            // ammo
+            $("#ammo9").change(updateRemaining);
+            $("#ammo45").change(updateRemaining);
+            $("#ammo12").change(updateRemaining);
+            $("#ammo556").change(updateRemaining);
+            $("#ammo762").change(updateRemaining);
+            $("#ammomag").change(updateRemaining);
+            // healing
+            $("#medkit").change(updateRemaining);
+            $("#firstaid").change(updateRemaining);
+            $("#bandage").change(updateRemaining);
+            $("#energy").change(updateRemaining);
+            $("#painkiller").change(updateRemaining);
+            $("#adrenaline").change(updateRemaining);
+            // misc
+            $("#gascan").change(updateRemaining);
+        </script>
+    </body>
+</html>
