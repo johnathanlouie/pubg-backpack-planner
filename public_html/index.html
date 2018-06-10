@@ -20,43 +20,61 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <title>PUBG Backpack Planner</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.min.js"></script>
     </head>
     <body>
-        <div data-ng-app="planner" data-ng-controller="plannerController">
+        <div class="container" data-ng-app="planner" data-ng-controller="plannerController">
             <h1>PUBG Backpack Planner</h1>
-            <input type="checkbox" checked disabled> Has a body +20<br>
-            <input type="checkbox" data-ng-model="belt"> Wearing belt +50<br>
-            <input type="checkbox" data-ng-model="vest"> Wearing vest +70<br>
-            <input type="radio" data-ng-model="backpack" value="backpack0"> No backpack +0<br>
-            <input type="radio" data-ng-model="backpack" value="backpack1"> Level 1 backpack +170<br>
-            <input type="radio" data-ng-model="backpack" value="backpack2"> Level 2 backpack +220<br>
-            <input type="radio" data-ng-model="backpack" value="backpack3"> Level 3 backpack +270<br>
-            <h2>Ammunition</h2>
-            <input type="number" data-ng-model="ammo9">9mm -0.375<br>
-            <input type="number" data-ng-model="ammo45">.45 ACP -0.4<br>
-            <input type="number" data-ng-model="ammo12">12 gauge -1.25<br>
-            <input type="number" data-ng-model="ammo556">5.56mm -0.5<br>
-            <input type="number" data-ng-model="ammo762">7.62mm -0.7<br>
-            <input type="number" data-ng-model="ammoMag">Magnum -1.0<br>
-            <h2>Healing Items</h2>
-            <input type="number" data-ng-model="medkit">Med kit -20<br>
-            <input type="number" data-ng-model="firstaid">first aid -10<br>
-            <input type="number" data-ng-model="bandage">bandage -2<br>
-            <input type="number" data-ng-model="energy">energy drink -4<br>
-            <input type="number" data-ng-model="painkiller">painkiller -10<br>
-            <input type="number" data-ng-model="adrenaline">adrenaline -20<br>
-            <h2>Throwables</h2>
-            <input type="number" data-ng-model="frag">frag -12<br>
-            <input type="number" data-ng-model="molotov">molotov -18<br>
-            <input type="number" data-ng-model="smoke">smoke -16<br>
-            <input type="number" data-ng-model="stun">stun -14<br>
-            <h2>Miscellaneous</h2>
-            <input type="number" data-ng-model="gascan">gas can -20<br>
-            <h2>Total</h2>
-            <p>Capacity: {{totalCapacity()}}</p>
-            <p>Weight: {{totalWeight()}}</p>
-            <p>Remaining Capacity: {{totalSpace()}}</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <input type="checkbox" checked disabled> Has a body +20<br>
+                    <input type="checkbox" data-ng-model="belt"> Wearing belt +50<br>
+                    <input type="checkbox" data-ng-model="vest"> Wearing vest +70<br>
+                    <input type="radio" data-ng-model="backpack" value="backpack0"> No backpack +0<br>
+                    <input type="radio" data-ng-model="backpack" value="backpack1"> Level 1 backpack +170<br>
+                    <input type="radio" data-ng-model="backpack" value="backpack2"> Level 2 backpack +220<br>
+                    <input type="radio" data-ng-model="backpack" value="backpack3"> Level 3 backpack +270<br>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Ammunition</h2>
+                    <input type="number" data-ng-model="ammo9">9mm -0.375<br>
+                    <input type="number" data-ng-model="ammo45">.45 ACP -0.4<br>
+                    <input type="number" data-ng-model="ammo12">12 gauge -1.25<br>
+                    <input type="number" data-ng-model="ammo556">5.56mm -0.5<br>
+                    <input type="number" data-ng-model="ammo762">7.62mm -0.7<br>
+                    <input type="number" data-ng-model="ammoMag">Magnum -1.0<br>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Healing Items</h2>
+                    <input type="number" data-ng-model="medkit">Med kit -20<br>
+                    <input type="number" data-ng-model="firstaid">first aid -10<br>
+                    <input type="number" data-ng-model="bandage">bandage -2<br>
+                    <input type="number" data-ng-model="energy">energy drink -4<br>
+                    <input type="number" data-ng-model="painkiller">painkiller -10<br>
+                    <input type="number" data-ng-model="adrenaline">adrenaline -20<br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2>Throwables</h2>
+                    <input type="number" data-ng-model="frag">frag -12<br>
+                    <input type="number" data-ng-model="molotov">molotov -18<br>
+                    <input type="number" data-ng-model="smoke">smoke -16<br>
+                    <input type="number" data-ng-model="stun">stun -14<br>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Miscellaneous</h2>
+                    <input type="number" data-ng-model="gascan">gas can -20<br>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Total</h2>
+                    <p>Capacity: {{totalCapacity()}}</p>
+                    <p>Weight: {{totalWeight()}}</p>
+                    <p>Remaining Capacity: {{totalSpace()}}</p>
+                </div>
+            </div>
         </div>
         <script src="planner.js"></script>
     </body>
