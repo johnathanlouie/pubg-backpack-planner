@@ -20,124 +20,44 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <title>PUBG Backpack Planner</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.0/angular.min.js"></script>
     </head>
     <body>
-        <h1>PUBG Backpack Planner</h1>
-        <input type="checkbox" checked disabled> Has a body +20<br>
-        <input id="belt" type="checkbox" checked> Wearing belt +50<br>
-        <input id="vest" type="checkbox" checked> Wearing vest +70<br>
-        <input id="backpack0" type="radio" name="backpack"> No backpack +0<br>
-        <input id="backpack1" type="radio" name="backpack"> Level 1 backpack +170<br>
-        <input id="backpack2" type="radio" name="backpack" checked> Level 2 backpack +220<br>
-        <input id="backpack3" type="radio" name="backpack"> Level 3 backpack +270<br>
-        <input id="capacity" value="0">Total Capacity<br>
-        <h2>Ammunition</h2>
-        <input id="ammo9" value="0">9mm -0.375<br>
-        <input id="ammo45" value="0">.45 ACP -0.4<br>
-        <input id="ammo12" value="0">12 gauge -1.25<br>
-        <input id="ammo556" value="0">5.56mm -0.5<br>
-        <input id="ammo762" value="0">7.62mm -0.7<br>
-        <input id="ammomag" value="0">Magnum -1.0<br>
-        <h2>Healing Items</h2>
-        <input id="medkit" value="0">Med kit -20<br>
-        <input id="firstaid" value="0">first aid -10<br>
-        <input id="bandage" value="0">bandage -2<br>
-        <input id="energy" value="0">energy drink -4<br>
-        <input id="painkiller" value="0">painkiller -10<br>
-        <input id="adrenaline" value="0">adrenaline -20<br>
-        <h2>Throwables</h2>
-        <input id="frag" value="0">frag -12<br>
-        <input id="molotov" value="0">molotov -18<br>
-        <input id="smoke" value="0">smoke -16<br>
-        <input id="stun" value="0">stun -14<br>
-        <h2>Miscellaneous</h2>
-        <input id="gascan" value="0">gas can -20<br>
-        <h2>Total</h2>
-        <input id="weight" value="0">Weight<br>
-        <input id="remaining-capacity" value="0">Remaining Capacity<br>
-        <script>
-            var capacity = 0;
-            var weight = 0;
-            var remaining = 0;
-            function updateCapacity()
-            {
-                var cap = 20;
-                if ($("#belt").prop("checked")) {
-                    cap += 50;
-                }
-                if ($("#vest").prop("checked")) {
-                    cap += 70;
-                }
-                if ($("#backpack0").prop("checked")) {
-                    cap += 0;
-                } else if ($("#backpack1").prop("checked")) {
-                    cap += 170;
-                } else if ($("#backpack2").prop("checked")) {
-                    cap += 220;
-                } else {
-                    cap += 270;
-                }
-                $("#capacity").val(cap);
-                capacity = cap;
-            }
-            function updateWeight()
-            {
-                var wgt = 0;
-                // ammo
-                wgt += parseInt($("#ammo9").val()) * 0.375;
-                wgt += parseInt($("#ammo45").val()) * 0.4;
-                wgt += parseInt($("#ammo12").val()) * 1.25;
-                wgt += parseInt($("#ammo556").val()) * 0.5;
-                wgt += parseInt($("#ammo762").val()) * 0.7;
-                wgt += parseInt($("#ammomag").val()) * 1;
-                // healing
-                wgt += parseInt($("#medkit").val()) * 20;
-                wgt += parseInt($("#firstaid").val()) * 10;
-                wgt += parseInt($("#bandage").val()) * 2;
-                wgt += parseInt($("#energy").val()) * 4;
-                wgt += parseInt($("#painkiller").val()) * 10;
-                wgt += parseInt($("#adrenaline").val()) * 20;
-                // throwables
-                wgt += parseInt($("#frag").val()) * 12;
-                wgt += parseInt($("#molotov").val()) * 18;
-                wgt += parseInt($("#smoke").val()) * 16;
-                wgt += parseInt($("#stun").val()) * 14;
-                // misc
-                wgt += parseInt($("#gascan").val()) * 20;
-                $("#weight").val(wgt);
-                weight = wgt;
-            }
-            function updateRemaining()
-            {
-                updateCapacity();
-                updateWeight();
-                remaining = capacity - weight;
-                $("#remaining-capacity").val(remaining);
-            }
-            updateRemaining();
-            $("#belt").change(updateRemaining);
-            $("#vest").change(updateRemaining);
-            $("#backpack0").change(updateRemaining);
-            $("#backpack1").change(updateRemaining);
-            $("#backpack2").change(updateRemaining);
-            $("#backpack3").change(updateRemaining);
-            // ammo
-            $("#ammo9").change(updateRemaining);
-            $("#ammo45").change(updateRemaining);
-            $("#ammo12").change(updateRemaining);
-            $("#ammo556").change(updateRemaining);
-            $("#ammo762").change(updateRemaining);
-            $("#ammomag").change(updateRemaining);
-            // healing
-            $("#medkit").change(updateRemaining);
-            $("#firstaid").change(updateRemaining);
-            $("#bandage").change(updateRemaining);
-            $("#energy").change(updateRemaining);
-            $("#painkiller").change(updateRemaining);
-            $("#adrenaline").change(updateRemaining);
-            // misc
-            $("#gascan").change(updateRemaining);
-        </script>
+        <div data-ng-app="planner" data-ng-controller="plannerController">
+            <h1>PUBG Backpack Planner</h1>
+            <input type="checkbox" checked disabled> Has a body +20<br>
+            <input type="checkbox" data-ng-model="belt"> Wearing belt +50<br>
+            <input type="checkbox" data-ng-model="vest"> Wearing vest +70<br>
+            <input type="radio" data-ng-model="backpack" value="backpack0"> No backpack +0<br>
+            <input type="radio" data-ng-model="backpack" value="backpack1"> Level 1 backpack +170<br>
+            <input type="radio" data-ng-model="backpack" value="backpack2"> Level 2 backpack +220<br>
+            <input type="radio" data-ng-model="backpack" value="backpack3"> Level 3 backpack +270<br>
+            <h2>Ammunition</h2>
+            <input type="number" data-ng-model="ammo9">9mm -0.375<br>
+            <input type="number" data-ng-model="ammo45">.45 ACP -0.4<br>
+            <input type="number" data-ng-model="ammo12">12 gauge -1.25<br>
+            <input type="number" data-ng-model="ammo556">5.56mm -0.5<br>
+            <input type="number" data-ng-model="ammo762">7.62mm -0.7<br>
+            <input type="number" data-ng-model="ammoMag">Magnum -1.0<br>
+            <h2>Healing Items</h2>
+            <input type="number" data-ng-model="medkit">Med kit -20<br>
+            <input type="number" data-ng-model="firstaid">first aid -10<br>
+            <input type="number" data-ng-model="bandage">bandage -2<br>
+            <input type="number" data-ng-model="energy">energy drink -4<br>
+            <input type="number" data-ng-model="painkiller">painkiller -10<br>
+            <input type="number" data-ng-model="adrenaline">adrenaline -20<br>
+            <h2>Throwables</h2>
+            <input type="number" data-ng-model="frag">frag -12<br>
+            <input type="number" data-ng-model="molotov">molotov -18<br>
+            <input type="number" data-ng-model="smoke">smoke -16<br>
+            <input type="number" data-ng-model="stun">stun -14<br>
+            <h2>Miscellaneous</h2>
+            <input type="number" data-ng-model="gascan">gas can -20<br>
+            <h2>Total</h2>
+            <p>Capacity: {{totalCapacity()}}</p>
+            <p>Weight: {{totalWeight()}}</p>
+            <p>Remaining Capacity: {{totalSpace()}}</p>
+        </div>
+        <script src="planner.js"></script>
     </body>
 </html>
